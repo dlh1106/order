@@ -1,6 +1,7 @@
 package dev.practice.order.application.partner;
 
-import dev.practice.order.domain.partner.PartnerCommend;
+import dev.practice.order.domain.notification.NotificationService;
+import dev.practice.order.domain.partner.PartnerCommand;
 import dev.practice.order.domain.partner.PartnerInfo;
 import dev.practice.order.domain.partner.PartnerService;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PartnerFacade {
     private final PartnerService partnerService;
+    private final NotificationService notificationService;
 
-    public PartnerInfo registerPartner(PartnerCommend commend) {
+    public PartnerInfo registerPartner(PartnerCommand commend) {
+        // 1. partnerService register
+        // 2. email 발송
         var partnerInfo = partnerService.registerPartner(commend);
-
-
-
-
+        notificationService.sendEmail(partnerInfo.getEmail(),"title","description");
         return partnerInfo;
     }
 }

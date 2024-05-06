@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class PartnerCommend {
+public class PartnerCommand {
     private final String name;
     private final String businessNo;
     private final String email;
